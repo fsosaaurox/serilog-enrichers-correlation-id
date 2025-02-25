@@ -1,12 +1,7 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using Serilog.Core;
 using Serilog.Events;
-
-#if NETFULL
-using Serilog.Enrichers.CorrelationId.Accessors;
-#else
-using Microsoft.AspNetCore.Http;
-#endif
 
 namespace Serilog.Enrichers
 {

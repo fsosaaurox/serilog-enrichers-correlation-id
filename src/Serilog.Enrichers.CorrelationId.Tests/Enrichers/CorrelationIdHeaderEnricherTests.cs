@@ -4,6 +4,7 @@ using Serilog.Enrichers;
 using Serilog.Events;
 using Serilog.Tests.Support;
 using Microsoft.AspNetCore.Http;
+using NUnit.Framework.Legacy;
 
 namespace Serilog.Tests.Enrichers
 {
@@ -37,9 +38,9 @@ namespace Serilog.Tests.Enrichers
 
             log.Information(@"Has a CorrelationId property");
 
-            Assert.NotNull(evt);
-            Assert.IsTrue(evt.Properties.ContainsKey("CorrelationId"));
-            Assert.NotNull(evt.Properties["CorrelationId"].LiteralValue());
+            ClassicAssert.NotNull(evt);
+            ClassicAssert.IsTrue(evt.Properties.ContainsKey("CorrelationId"));
+            ClassicAssert.NotNull(evt.Properties["CorrelationId"].LiteralValue());
         }
 
         [Test]
@@ -60,9 +61,9 @@ namespace Serilog.Tests.Enrichers
 
             log.Information(@"Has a CorrelationId property");
 
-            Assert.NotNull(evt);
-            Assert.IsTrue(evt.Properties.ContainsKey("CorrelationId"));
-            Assert.AreEqual(evt.Properties["CorrelationId"].LiteralValue(), "my-correlation-id");
+            ClassicAssert.NotNull(evt);
+            ClassicAssert.IsTrue(evt.Properties.ContainsKey("CorrelationId"));
+            ClassicAssert.AreEqual(evt.Properties["CorrelationId"].LiteralValue(), "my-correlation-id");
         }
 
         [Test]
@@ -79,8 +80,8 @@ namespace Serilog.Tests.Enrichers
 
             log.Information(@"Does not have a CorrelationId property");
 
-            Assert.NotNull(evt);
-            Assert.IsFalse(evt.Properties.ContainsKey("CorrelationId"));
+            ClassicAssert.NotNull(evt);
+            ClassicAssert.IsFalse(evt.Properties.ContainsKey("CorrelationId"));
         }
 
         [Test]
@@ -103,7 +104,7 @@ namespace Serilog.Tests.Enrichers
 
             log.Information(@"Here is another event");
 
-            Assert.AreEqual(correlationId, evt.Properties["CorrelationId"].LiteralValue());
+            ClassicAssert.AreEqual(correlationId, evt.Properties["CorrelationId"].LiteralValue());
         }
     }
 }

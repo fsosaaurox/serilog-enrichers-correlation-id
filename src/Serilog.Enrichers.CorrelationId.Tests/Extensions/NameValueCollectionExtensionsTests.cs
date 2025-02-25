@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using Serilog.Enrichers.CorrelationId.Extensions;
 
 namespace Serilog.Tests.Extensions
@@ -13,7 +14,7 @@ namespace Serilog.Tests.Extensions
         {
             var collection = new NameValueCollection {{"MyKey", "MyValue"}};
 
-            Assert.IsTrue(collection.TryGetValue("MyKey", out _));
+            ClassicAssert.IsTrue(collection.TryGetValue("MyKey", out _));
         }
 
         [Test]
@@ -21,8 +22,10 @@ namespace Serilog.Tests.Extensions
         {
             var collection = new NameValueCollection {{"MyKey", "MyValue"}};
 
-            Assert.IsFalse(collection.TryGetValue("BadKey", out _));
+            ClassicAssert.IsFalse(collection.TryGetValue("BadKey", out _));
         }
+
+        private static readonly string[] expected = ["MyValue"];
 
         [Test]
         public void TryGetValue_SetsValues_WhenKeyIsFound()
@@ -31,7 +34,7 @@ namespace Serilog.Tests.Extensions
 
             collection.TryGetValue("MyKey", out var values);
 
-            Assert.AreEqual(new[] { "MyValue" }, values);
+            ClassicAssert.AreEqual(expected, values);
         }
 
         [Test]
@@ -41,7 +44,7 @@ namespace Serilog.Tests.Extensions
 
             collection.TryGetValue("BadKey", out var values);
 
-            Assert.IsNull(values);
+            ClassicAssert.IsNull(values);
         }
     }
 }
